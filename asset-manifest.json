@@ -1,0 +1,532 @@
+[
+  {
+    "name": "img",
+    "file": "assets/3147f.png",
+    "bytes": 108108
+  },
+  {
+    "name": "img1",
+    "file": "assets/b7efe.png",
+    "bytes": 35837
+  },
+  {
+    "name": "img88",
+    "file": "assets/10147.png",
+    "bytes": 210073
+  },
+  {
+    "name": "img89",
+    "file": "assets/ce163.png",
+    "bytes": 239040
+  },
+  {
+    "name": "img90",
+    "file": "assets/b5f8b.png",
+    "bytes": 445189
+  },
+  {
+    "name": "img91",
+    "file": "assets/de647.png",
+    "bytes": 278666
+  },
+  {
+    "name": "img92",
+    "file": "assets/5743e.png",
+    "bytes": 22018
+  },
+  {
+    "name": "img93",
+    "file": "assets/5bbc0.png",
+    "bytes": 21048
+  },
+  {
+    "name": "img101",
+    "file": "assets/e4611.png",
+    "bytes": 64642
+  },
+  {
+    "name": "img102",
+    "file": "assets/08fc7.png",
+    "bytes": 452578
+  },
+  {
+    "name": "img104",
+    "file": "assets/a4f7c.png",
+    "bytes": 56161
+  },
+  {
+    "name": "img94",
+    "file": "assets/6b8d1.png",
+    "bytes": 39026
+  },
+  {
+    "name": "img103",
+    "file": "assets/1de65.png",
+    "bytes": 124975
+  },
+  {
+    "name": "img22",
+    "file": "assets/eb403.png",
+    "bytes": 315363
+  },
+  {
+    "name": "img27",
+    "file": "assets/d1001.png",
+    "bytes": 376551
+  },
+  {
+    "name": "img40",
+    "file": "assets/9fcb6.png",
+    "bytes": 334871
+  },
+  {
+    "name": "img41",
+    "file": "assets/d23c7.png",
+    "bytes": 212503
+  },
+  {
+    "name": "img39",
+    "file": "assets/ed1d2.png",
+    "bytes": 402176
+  },
+  {
+    "name": "img18",
+    "file": "assets/903c0.png",
+    "bytes": 51162
+  },
+  {
+    "name": "img19",
+    "file": "assets/4cd4d.png",
+    "bytes": 62984
+  },
+  {
+    "name": "img20",
+    "file": "assets/42203.png",
+    "bytes": 1443935
+  },
+  {
+    "name": "img23",
+    "file": "assets/f8929.png",
+    "bytes": 86212
+  },
+  {
+    "name": "img45",
+    "file": "assets/d175e.png",
+    "bytes": 319050
+  },
+  {
+    "name": "img49",
+    "file": "assets/8a9fa.png",
+    "bytes": 236200
+  },
+  {
+    "name": "img48",
+    "file": "assets/6976a.png",
+    "bytes": 10300
+  },
+  {
+    "name": "img46",
+    "file": "assets/98979.png",
+    "bytes": 26733
+  },
+  {
+    "name": "img47",
+    "file": "assets/9954f.png",
+    "bytes": 24073
+  },
+  {
+    "name": "img50",
+    "file": "assets/44ab8.png",
+    "bytes": 36771
+  },
+  {
+    "name": "imgHairW1",
+    "file": "assets/410c4.png",
+    "bytes": 83908
+  },
+  {
+    "name": "imgHairW2",
+    "file": "assets/0cc4a.png",
+    "bytes": 93165
+  },
+  {
+    "name": "img2",
+    "file": "assets/1cccf.png",
+    "bytes": 37949
+  },
+  {
+    "name": "img95",
+    "file": "assets/12608.png",
+    "bytes": 11805
+  },
+  {
+    "name": "img105",
+    "file": "assets/c26af.png",
+    "bytes": 30433
+  },
+  {
+    "name": "img96",
+    "file": "assets/05202.png",
+    "bytes": 55947
+  },
+  {
+    "name": "img24",
+    "file": "assets/a589e.png",
+    "bytes": 50377
+  },
+  {
+    "name": "img3",
+    "file": "assets/ac8fb.png",
+    "bytes": 28053
+  },
+  {
+    "name": "img51",
+    "file": "assets/65cbe.png",
+    "bytes": 245541
+  },
+  {
+    "name": "img4",
+    "file": "assets/9a524.png",
+    "bytes": 138810
+  },
+  {
+    "name": "img5",
+    "file": "assets/f4bf4.png",
+    "bytes": 69201
+  },
+  {
+    "name": "img112",
+    "file": "assets/ef59d.png",
+    "bytes": 26186
+  },
+  {
+    "name": "img6",
+    "file": "assets/a2a25.png",
+    "bytes": 9556
+  },
+  {
+    "name": "img16",
+    "file": "assets/39099.png",
+    "bytes": 114935
+  },
+  {
+    "name": "img17",
+    "file": "assets/85ce5.png",
+    "bytes": 117350
+  },
+  {
+    "name": "img21",
+    "file": "assets/1afc7.png",
+    "bytes": 2492775
+  },
+  {
+    "name": "img32",
+    "file": "assets/5668e.png",
+    "bytes": 389311
+  },
+  {
+    "name": "img97",
+    "file": "assets/51993.png",
+    "bytes": 4352
+  },
+  {
+    "name": "img84",
+    "file": "assets/7ded1.png",
+    "bytes": 15869
+  },
+  {
+    "name": "img98",
+    "file": "assets/9b97e.png",
+    "bytes": 4235
+  },
+  {
+    "name": "img99",
+    "file": "assets/ec3f9.png",
+    "bytes": 3537
+  },
+  {
+    "name": "img85",
+    "file": "assets/334ba.png",
+    "bytes": 4343
+  },
+  {
+    "name": "img86",
+    "file": "assets/384d9.png",
+    "bytes": 4249
+  },
+  {
+    "name": "img100",
+    "file": "assets/5fb3a.png",
+    "bytes": 28286
+  },
+  {
+    "name": "img87",
+    "file": "assets/da982.png",
+    "bytes": 34248
+  },
+  {
+    "name": "img106",
+    "file": "assets/635e6.png",
+    "bytes": 31911
+  },
+  {
+    "name": "imgHairW3",
+    "file": "assets/5c903.png",
+    "bytes": 784084
+  },
+  {
+    "name": "imgHairP1",
+    "file": "assets/79db2.png",
+    "bytes": 784123
+  },
+  {
+    "name": "imgHairB1",
+    "file": "assets/aa101.png",
+    "bytes": 776674
+  },
+  {
+    "name": "img107",
+    "file": "assets/0e251.png",
+    "bytes": 131764
+  },
+  {
+    "name": "imgHairW4",
+    "file": "assets/c12d3.png",
+    "bytes": 925769
+  },
+  {
+    "name": "imgHairP2",
+    "file": "assets/66bb5.png",
+    "bytes": 948565
+  },
+  {
+    "name": "imgHairB2",
+    "file": "assets/27d37.png",
+    "bytes": 912892
+  },
+  {
+    "name": "img7",
+    "file": "assets/0f220.png",
+    "bytes": 10014
+  },
+  {
+    "name": "img8",
+    "file": "assets/43702.png",
+    "bytes": 8326
+  },
+  {
+    "name": "imgObject",
+    "file": "assets/f61c8.png",
+    "bytes": 2481
+  },
+  {
+    "name": "imgObject2",
+    "file": "assets/9447e.png",
+    "bytes": 2425
+  },
+  {
+    "name": "img25",
+    "file": "assets/04949.png",
+    "bytes": 133798
+  },
+  {
+    "name": "img26",
+    "file": "assets/a1313.png",
+    "bytes": 129197
+  },
+  {
+    "name": "img70",
+    "file": "assets/94130.png",
+    "bytes": 5116
+  },
+  {
+    "name": "img62",
+    "file": "assets/ad026.png",
+    "bytes": 58982
+  },
+  {
+    "name": "img59",
+    "file": "assets/1dc57.png",
+    "bytes": 889850
+  },
+  {
+    "name": "img71",
+    "file": "assets/596cc.png",
+    "bytes": 1211960
+  },
+  {
+    "name": "img108",
+    "file": "assets/4c94c.png",
+    "bytes": 10601
+  },
+  {
+    "name": "img9",
+    "file": "assets/3bf7f.png",
+    "bytes": 14003
+  },
+  {
+    "name": "img66",
+    "file": "assets/08706.png",
+    "bytes": 657931
+  },
+  {
+    "name": "img83",
+    "file": "assets/f2119.png",
+    "bytes": 6804
+  },
+  {
+    "name": "img109",
+    "file": "assets/c4e42.png",
+    "bytes": 5957
+  },
+  {
+    "name": "img110",
+    "file": "assets/c0778.png",
+    "bytes": 5486
+  },
+  {
+    "name": "img111",
+    "file": "assets/7174d.png",
+    "bytes": 198270
+  },
+  {
+    "name": "img113",
+    "file": "assets/4a50e.png",
+    "bytes": 21723
+  },
+  {
+    "name": "img114",
+    "file": "assets/6b98a.png",
+    "bytes": 108975
+  },
+  {
+    "name": "img115",
+    "file": "assets/91ea5.png",
+    "bytes": 99415
+  },
+  {
+    "name": "img116",
+    "file": "assets/368c8.png",
+    "bytes": 6700
+  },
+  {
+    "name": "img117",
+    "file": "assets/0af1b.png",
+    "bytes": 243131
+  },
+  {
+    "name": "img118",
+    "file": "assets/8e9c1.png",
+    "bytes": 37758
+  },
+  {
+    "name": "img119",
+    "file": "assets/d5507.png",
+    "bytes": 11939
+  },
+  {
+    "name": "img10",
+    "file": "assets/e759b.png",
+    "bytes": 1275913
+  },
+  {
+    "name": "img11",
+    "file": "assets/1b969.png",
+    "bytes": 47088
+  },
+  {
+    "name": "img53",
+    "file": "assets/01b12.png",
+    "bytes": 52023
+  },
+  {
+    "name": "img120",
+    "file": "assets/e6aec.png",
+    "bytes": 11319
+  },
+  {
+    "name": "img121",
+    "file": "assets/e1b92.png",
+    "bytes": 10898
+  },
+  {
+    "name": "img122",
+    "file": "assets/205ec.png",
+    "bytes": 31837
+  },
+  {
+    "name": "img123",
+    "file": "assets/27132.png",
+    "bytes": 5075
+  },
+  {
+    "name": "img124",
+    "file": "assets/6ff6c.png",
+    "bytes": 7883
+  },
+  {
+    "name": "img125",
+    "file": "assets/14e93.png",
+    "bytes": 4817
+  },
+  {
+    "name": "img126",
+    "file": "assets/787d7.png",
+    "bytes": 7775
+  },
+  {
+    "name": "img127",
+    "file": "assets/63a20.png",
+    "bytes": 7526
+  },
+  {
+    "name": "img128",
+    "file": "assets/17e83.png",
+    "bytes": 18599
+  },
+  {
+    "name": "portrait-base",
+    "file": "assets/portrait-base.png",
+    "bytes": 559920
+  },
+  {
+    "name": "portrait-shirt",
+    "file": "assets/portrait-shirt.png",
+    "bytes": 784639
+  },
+  {
+    "name": "portrait-detail",
+    "file": "assets/portrait-detail.png",
+    "bytes": 8528
+  },
+  {
+    "name": "figure-base",
+    "file": "assets/figure-base.png",
+    "bytes": 421331
+  },
+  {
+    "name": "figure-pants-dark",
+    "file": "assets/figure-pants-dark.png",
+    "bytes": 364215
+  },
+  {
+    "name": "figure-pants-light",
+    "file": "assets/figure-pants-light.png",
+    "bytes": 405997
+  },
+  {
+    "name": "figure-vest",
+    "file": "assets/figure-vest.png",
+    "bytes": 91176
+  },
+  {
+    "name": "figure-gloves",
+    "file": "assets/figure-gloves.png",
+    "bytes": 21208
+  },
+  {
+    "name": "portrait-hair-w1",
+    "file": "assets/portrait-hair-w1.png",
+    "bytes": 516656
+  }
+]
