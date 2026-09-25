@@ -144,7 +144,6 @@ export function App(){
             full 2965×1668 backing surfaces (over 1 GB at phone DPR 3). */}
         <div ref={stage} className="stage" style={{zoom:scale}} inert={!ready}>
           <RawArt file="e759b.png" x={975} y={0} w={1572} h={1668}/>
-          <RawArt file="1b969.png" x={1349} y={1561} w={950} h={107}/>
           {ready&&<Particles/>}
           <div className="illustration" role="img" aria-label={`Felix portrait, ${state.hairColor==='w'?'blond':state.hairColor==='p'?'pink':'black'} ${state.hairstyle===1?'loose':'tied'} hair, ${state.eyeColor} eyes, blue shirt`}>
             <MaskGroup x={318} y={228} w={1281} h={1440} mask="04949.png" layers={[
@@ -159,6 +158,8 @@ export function App(){
           </div>
 
           <div className="figure" role="img" aria-label={`Felix full-length, ${state.hairColor==='w'?'blond':state.hairColor==='p'?'pink':'black'} ${state.hairstyle===1?'loose':'tied'} hair, original eyes, ${state.top||'no top'}, ${state.pants}${state.swords?', twin katanas':''}${state.gloves?', gloves':', bare hands'}`}>
+            {/* Keep the ground shadow above the portrait fade and below the feet. */}
+            <RawArt file="1b969.png" x={1349} y={1561} w={950} h={107} className="figure-shadow"/>
             <MaskGroup x={1547} y={242} w={516} h={1427} mask="39099.png" layers={[
               ['85ce5.png',0,0,516,1427],['1afc7.png',-631,-241,1719,1668]
             ]}/>
