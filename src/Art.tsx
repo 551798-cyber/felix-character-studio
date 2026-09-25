@@ -112,8 +112,10 @@ export function Component14({ className, property1 = "Катаны" }: Component
   return (
     <div className={className || `relative ${is2 ? "h-[423px] w-[490px]" : is1 ? "h-[423px] w-[494px]" : ["Джинсы", "Штаны Хаки"].includes(property1) ? "h-[506px] w-[884px]" : is ? "h-[174px] w-[412px]" : "size-[609px]"}`} id={is2 ? "node-11_761" : is4 ? "node-11_762" : is1 ? "node-11_763" : is3 ? "node-11_764" : is ? "node-11_765" : "node-11_766"}>
       {["Катаны", "Перчатки"].includes(property1) && (
-        <div className="absolute flex inset-0 items-center justify-center" id={is ? "node-11_757" : "node-11_759"} style={{ containerType: "size" }}>
-          <div className="-rotate-90 -scale-x-100 flex-none h-[100cqw] w-[100cqh]">
+        <div className="absolute flex inset-0 items-center justify-center" id={is ? "node-11_757" : "node-11_759"}>
+          {/* Source axes are transposed. Use design dimensions: container query
+              units can apply zoom twice in iOS WebViews, shrinking this layer. */}
+          <div className="-rotate-90 -scale-x-100 flex-none" style={{width:is?174:609,height:is?412:609}}>
             {property1 === "Катаны" && (
               <div className="relative size-full" data-name="Катаны">
                 <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img} />
@@ -240,8 +242,8 @@ export function Component({ className, property1 = "Hair w2" }: ComponentProps) 
   const isHairW2 = property1 === "Hair w2";
   return (
     <div className={className || "h-[320px] relative w-[185px]"} id={isHairW2 ? "node-11_703" : "node-11_706"}>
-      <div className="absolute flex inset-0 items-center justify-center" id={isHairW2 ? "node-11_698" : "node-11_695"} style={{ containerType: "size" }}>
-        <div className="-rotate-90 -scale-x-100 flex-none h-[100cqw] w-[100cqh]">
+      <div className="absolute flex inset-0 items-center justify-center" id={isHairW2 ? "node-11_698" : "node-11_695"}>
+        <div className="-rotate-90 -scale-x-100 flex-none" style={{width:320,height:185}}>
           {property1 === "Hair w1" && (
             <div className="relative size-full" data-name="Hair w1">
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -672,8 +674,8 @@ export function Component9({ className, property1 = "голубые" }: Componen
   const is1 = property1 === "голубые";
   return (
     <div className={className || "h-[83px] relative w-[226px]"} id={is1 ? "node-3_914" : is ? "node-3_915" : "node-3_916"}>
-      <div className={`absolute ${is1 ? "-translate-y-1/2 contents left-[1.77%] right-[1.77%] top-[calc(50%-5px)]" : "flex h-[83px] items-center justify-center left-0 top-0 w-[226px]"}`} id={is1 ? "node-3_907" : is ? "node-3_900" : "node-3_899"} style={is1 ? { containerType: "size" } : undefined}>
-        <div className={is1 ? "-translate-y-1/2 absolute aspect-[37/27] flex items-center justify-center left-[81.86%] right-[1.77%] top-[calc(50%-25px)]" : "-scale-y-100 flex-none rotate-90"} id={is1 ? "node-3_908" : undefined} style={is1 ? { containerType: "size" } : undefined}>
+      <div className={`absolute ${is1 ? "-translate-y-1/2 contents left-[1.77%] right-[1.77%] top-[calc(50%-5px)]" : "flex h-[83px] items-center justify-center left-0 top-0 w-[226px]"}`} id={is1 ? "node-3_907" : is ? "node-3_900" : "node-3_899"}>
+        <div className={is1 ? "-translate-y-1/2 absolute aspect-[37/27] flex items-center justify-center left-[81.86%] right-[1.77%] top-[calc(50%-25px)]" : "-scale-y-100 flex-none rotate-90"} id={is1 ? "node-3_908" : undefined}>
           {property1 === "Красные" && (
             <div className="h-[226px] relative w-[83px]" data-name="Красные">
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -689,7 +691,7 @@ export function Component9({ className, property1 = "голубые" }: Componen
             </div>
           )}
           {is1 && (
-            <div className="-rotate-90 -scale-x-100 flex-none h-[100cqw] w-[100cqh]">
+            <div className="-rotate-90 -scale-x-100 flex-none" style={{width:27,height:37}}>
               <div className="relative size-full" data-name="Object">
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                   <img alt="" className="absolute h-[97.3%] left-0 max-w-none top-0 w-full" src={imgObject} />
@@ -699,8 +701,8 @@ export function Component9({ className, property1 = "голубые" }: Componen
           )}
         </div>
         {is1 && (
-          <div className="-translate-y-1/2 absolute aspect-[35/25] flex items-center justify-center left-[1.77%] right-[82.74%] top-[calc(50%+16px)]" data-node-id="3:909" style={{ containerType: "size" }}>
-            <div className="-rotate-90 -scale-x-100 flex-none h-[100cqw] w-[100cqh]">
+          <div className="-translate-y-1/2 absolute aspect-[35/25] flex items-center justify-center left-[1.77%] right-[82.74%] top-[calc(50%+16px)]" data-node-id="3:909">
+            <div className="-rotate-90 -scale-x-100 flex-none" style={{width:25,height:35}}>
               <div className="relative size-full" data-name="Object 2">
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
                   <img alt="" className="absolute left-0 max-w-none size-full top-0" src={imgObject2} />
