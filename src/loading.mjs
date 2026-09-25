@@ -1,4 +1,4 @@
-export async function waitForArtwork(files, {timeoutMs=15000,onProgress=()=>{},createImage=()=>new Image()}={}) {
+export async function waitForArtwork(files, {timeoutMs=15000,onProgress=()=>{},createImage=()=>new Image(),decode=false}={}) {
   const unique=[...new Set(files)];
   let completed=0;
   const results=await Promise.all(unique.map(file=>new Promise(resolve=>{
@@ -13,7 +13,10 @@ export async function waitForArtwork(files, {timeoutMs=15000,onProgress=()=>{},c
       resolve(ok?null:file);
     };
     const timer=setTimeout(()=>finish(false),timeoutMs);
-    image.onload=()=>finish(true);
+    image.onload=async()=>{
+      try {if(decode&&image.decode)await image.decode();finish(true);}
+      catch {finish(false);}
+    };
     image.onerror=()=>finish(false);
     image.src=file;
   })));

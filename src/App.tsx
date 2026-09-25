@@ -4,6 +4,7 @@ import {initialState,characterReducer} from './state.mjs';
 import {unlockSound,playSound,attachMusic,setMusicActive} from './sound.mjs';
 import {waitForArtwork} from './loading.mjs';
 import {assetPathPrefix} from './assets.mjs';
+import {createHairSelection} from './hair-loading.mjs';
 
 const rect=(x:number,y:number,w:number,h:number)=>({left:x,top:y,width:w,height:h});
 // Grid lines and item targets share one geometry, including the panel border/header.
@@ -76,6 +77,16 @@ export function App(){
   const [announcement,setAnnouncement]=useState('');
   const [mascotActive,setMascotActive]=useState(false);
   const [tooltip,setTooltip]=useState<any>(null);
+  const [hairPending,setHairPending]=useState(false);
+  const [hairError,setHairError]=useState(false);
+  const hairSelection=useRef<any>(null);
+  if(!hairSelection.current)hairSelection.current=createHairSelection({
+    initial:initialState,
+    commit:(value:any)=>{dispatch({type:'hairReady',value});setAnnouncement('Hairstyle updated on portrait and figure');},
+    onPending:setHairPending,
+    onError:()=>{setHairError(true);setAnnouncement('Hair could not load. Your previous look is kept. Choose again to retry.');},
+  });
+  useEffect(()=>()=>hairSelection.current?.cancel(),[]);
   const stage=useRef<HTMLDivElement>(null);
   const viewport=useRef<HTMLElement>(null);
   useEffect(()=>{if(music.current)return attachMusic(music.current);},[]);
@@ -127,7 +138,13 @@ export function App(){
       setAnnouncement('Music could not start. Press Music off to retry.');
     }
   };
-  const act=(type:string,value:any,label:string)=>{void playSound(type==='equip'?'equip':'click');dispatch({type,value});setAnnouncement(label);setTooltip(null);};
+  const act=(type:string,value:any,label:string)=>{
+    void playSound(type==='equip'?'equip':'click');setTooltip(null);
+    if(type==='hairstyle'||type==='hairColor'){
+      setHairError(false);void hairSelection.current.select(type,value);return;
+    }
+    dispatch({type,value});setAnnouncement(label);
+  };
   const hover=(e:React.MouseEvent,label?:string)=>{void playSound('hover');if(label){const r=e.currentTarget.getBoundingClientRect();setTooltip({label,x:r.left+r.width/2,y:r.top-10});}};
   const buttonEvents=(label?:string)=>({onMouseEnter:(e:React.MouseEvent)=>hover(e,label),onMouseLeave:()=>setTooltip(null),onBlur:()=>setTooltip(null)});
   const item=(key:string,equipped:boolean,x:number,y:number,w:number,h:number)=>{
@@ -188,7 +205,8 @@ export function App(){
             <div className="stat credits" style={rect(2646,58,152,105)}><span>Credits:</span><span className="stat-value">14820</span></div>
           </header>
 
-          <section className="appearance" aria-label="Appearance">
+          <section className="appearance" aria-label="Appearance" aria-busy={hairPending}>
+            {(hairPending||hairError)&&<p className="hair-status" role="status">{hairPending?'Loading hair…':'Hair unavailable. Select again to retry.'}</p>}
             <h2 className="field-label" style={rect(209,252,170,51)}>Hairstyle:</h2>
             {[1,2].map((v,i)=><button key={v} className={'appearance-button hairstyle '+(state.hairstyle===v?'selected':'')} style={rect(220,318+i*180,127,185)} aria-label={v===1?'Loose hair':'Tied hair'} aria-pressed={state.hairstyle===v} {...buttonEvents()} onClick={()=>act('hairstyle',v,v===1?'Loose hair selected':'Tied hair selected')}><HairstyleArt property1={v===1?'Frame 3':'Frame 2'}/></button>)}
             <h2 className="field-label" style={rect(1147,239,172,51)}>Hair color:</h2>

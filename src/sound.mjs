@@ -14,6 +14,13 @@ export function setMusicActive(enabled){
 }
 
 export async function unlockSound(){
+  // iOS otherwise switches Web Audio back to an ambient (silent-switch-muted)
+  // session when the HTML music player pauses. Effects need their own playback
+  // intent, regardless of whether background music is playing (WebKit #251532).
+  try {
+    const session=window.navigator?.audioSession;
+    if(session&&session.type!=='playback')session.type='playback';
+  } catch {/* Browsers without Audio Session support still use Web Audio. */}
   if(!context){
     context=new (window.AudioContext||window.webkitAudioContext)();
     master=context.createGain();master.gain.value=1;master.connect(context.destination);

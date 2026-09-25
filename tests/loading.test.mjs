@@ -18,3 +18,17 @@ test('an image that never responds cannot trap the user in an endless loading sc
   const failed=await waitForArtwork(['ok.png','stalled.png'],{createImage,timeoutMs:15});
   assert.deepEqual(failed,['stalled.png']);
 });
+
+test('hair preparation waits for decoding and reports corrupt images',async()=>{
+  let finishDecode,done=false;
+  const pending=waitForArtwork(['hair.png'],{decode:true,createImage:()=>({
+    set src(url){queueMicrotask(()=>this.onload());},
+    decode(){return new Promise(resolve=>{finishDecode=resolve;});},
+  })}).then(failed=>{done=true;return failed;});
+  await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(done,false,'network completion alone must not reveal undecoded artwork');
+  finishDecode();assert.deepEqual(await pending,[]);
+  assert.deepEqual(await waitForArtwork(['corrupt.png'],{decode:true,createImage:()=>({
+    set src(url){queueMicrotask(()=>this.onload());},decode(){return Promise.reject(new Error('corrupt'));},
+  })}),['corrupt.png']);
+});
