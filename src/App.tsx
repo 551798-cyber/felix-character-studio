@@ -1,8 +1,9 @@
 import React, {useEffect,useReducer,useRef,useState} from 'react';
-import {createRoot} from 'react-dom/client';
 import {Component14 as Clothing,Component as FigureHair,Component1 as ItemArt,Component3 as HairSwatch,Component4 as EyeSwatch,Component5 as HairstyleArt,Component6 as PortraitHair,Component9 as PortraitEyes} from './Art';
 import {initialState,characterReducer} from './state.mjs';
 import {unlockSound,playSound,attachMusic,setMusicActive} from './sound.mjs';
+import {waitForArtwork} from './loading.mjs';
+import {assetPathPrefix} from './assets.mjs';
 
 const rect=(x:number,y:number,w:number,h:number)=>({left:x,top:y,width:w,height:h});
 // Grid lines and item targets share one geometry, including the panel border/header.
@@ -25,13 +26,13 @@ const hairChoices=[['w','Blond','Frame 2'],['p','Pink','Frame 4'],['b','Black','
 const eyeChoices=[['blue','Blue','Frame 2'],['red','Red','Frame 3'],['black','Black','Frame 4']];
 
 function RawArt({file,x,y,w,h,style={},className=''}:any){
-  return <div className={'raw-art '+className} style={{...rect(x,y,w,h),...style}} aria-hidden="true"><div style={{width:h,height:w,transform:'rotate(90deg) scaleY(-1)'}}><img src={'./assets/'+file} alt="" draggable="false"/></div></div>;
+  return <div className={'raw-art '+className} style={{...rect(x,y,w,h),...style}} aria-hidden="true"><div style={{width:h,height:w,transform:'rotate(90deg) scaleY(-1)'}}><img src={assetPathPrefix+'/'+file} alt="" draggable="false"/></div></div>;
 }
-function Layer({file,x,y,w,h,className='',style={}}:any){return <img aria-hidden="true" alt="" draggable="false" src={'./assets/'+file} className={'art-layer '+className} style={{...rect(x,y,w,h),...style}}/>;}
+function Layer({file,x,y,w,h,className='',style={}}:any){return <img aria-hidden="true" alt="" draggable="false" src={assetPathPrefix+'/'+file} className={'art-layer '+className} style={{...rect(x,y,w,h),...style}}/>;}
 
 // Source PNGs use the same transposed axes as the original Figma painting.
 // Compose masks in source coordinates, then apply the transform once.
-function MaskGroup({x,y,w,h,mask,layers}:any){return <div className="source-group" style={rect(x,y,w,h)} aria-hidden="true"><div style={{width:h,height:w,maskImage:`url(./assets/${mask})`,maskSize:'100% 100%',maskRepeat:'no-repeat',transform:'rotate(90deg) scaleY(-1)'}}>{layers.map((l:any,i:number)=><img key={i} alt="" src={'./assets/'+l[0]} style={{position:'absolute',...rect(l[2],l[1],l[4],l[3])}}/>)}</div></div>;}
+function MaskGroup({x,y,w,h,mask,layers}:any){return <div className="source-group" style={rect(x,y,w,h)} aria-hidden="true"><div style={{width:h,height:w,WebkitMaskImage:`url(${assetPathPrefix}/${mask})`,WebkitMaskSize:'100% 100%',WebkitMaskRepeat:'no-repeat',maskImage:`url(${assetPathPrefix}/${mask})`,maskSize:'100% 100%',maskRepeat:'no-repeat',transform:'rotate(90deg) scaleY(-1)'}}>{layers.map((l:any,i:number)=><img key={i} alt="" src={assetPathPrefix+'/'+l[0]} style={{position:'absolute',...rect(l[2],l[1],l[4],l[3])}}/>)}</div></div>;}
 
 function Cursor(){
   const ref=useRef<HTMLDivElement>(null);
@@ -53,13 +54,15 @@ function Particles(){
       if(motion.matches||document.hidden){node.pause();return;}
       void node.play().catch(()=>{/* The poster remains visible if playback is unavailable. */});
     };
-    sync();motion.addEventListener('change',sync);document.addEventListener('visibilitychange',sync);
-    return()=>{motion.removeEventListener('change',sync);document.removeEventListener('visibilitychange',sync);};
+    sync();
+    if(motion.addEventListener)motion.addEventListener('change',sync);else motion.addListener(sync);
+    document.addEventListener('visibilitychange',sync);
+    return()=>{if(motion.removeEventListener)motion.removeEventListener('change',sync);else motion.removeListener(sync);document.removeEventListener('visibilitychange',sync);};
   },[]);
   return <video ref={video} className="particles" src="./assets/particles.mp4" poster="./assets/particles-poster.jpg" muted loop playsInline preload="metadata" aria-hidden="true" tabIndex={-1}/>;
 }
 
-function App(){
+export function App(){
   const [state,dispatch]=useReducer(characterReducer,initialState);
   const [sound,setSound]=useState(false);
   const [soundStarting,setSoundStarting]=useState(false);
@@ -74,6 +77,7 @@ function App(){
   const [mascotActive,setMascotActive]=useState(false);
   const [tooltip,setTooltip]=useState<any>(null);
   const stage=useRef<HTMLDivElement>(null);
+  const viewport=useRef<HTMLElement>(null);
   useEffect(()=>{if(music.current)return attachMusic(music.current);},[]);
   useEffect(()=>{
     const activate=()=>{void unlockSound().catch(()=>{/* Effects can retry on the next gesture. */});};
@@ -81,14 +85,29 @@ function App(){
     document.addEventListener('pointerdown',activate,true);document.addEventListener('keydown',keyboard,true);
     return()=>{document.removeEventListener('pointerdown',activate,true);document.removeEventListener('keydown',keyboard,true);};
   },[]);
-  useEffect(()=>{const fit=()=>setScale(Math.min(innerWidth/2965,innerHeight/1668));window.addEventListener('resize',fit);return()=>window.removeEventListener('resize',fit);},[]);
+  useEffect(()=>{
+    // Measure the layout viewport, not the pinch-zoomed visual viewport.
+    const fit=()=>{const node=viewport.current;if(node)setScale(Math.min(node.clientWidth/2965,node.clientHeight/1668));};
+    const observer=typeof ResizeObserver==='undefined'?null:new ResizeObserver(fit);
+    if(viewport.current)observer?.observe(viewport.current);
+    fit();window.addEventListener('resize',fit);window.addEventListener('orientationchange',fit);
+    return()=>{observer?.disconnect();window.removeEventListener('resize',fit);window.removeEventListener('orientationchange',fit);};
+  },[]);
   useEffect(()=>{
     let cancelled=false;
-    fetch('./preload.json').then(r=>{if(!r.ok)throw Error('manifest');return r.json();}).then(async(files:string[])=>{
-      let loaded=0;
-      await Promise.all(files.map(file=>new Promise<void>((resolve,reject)=>{const img=new Image();img.onload=()=>{loaded++;if(!cancelled)setProgress(Math.round(loaded/files.length*100));resolve();};img.onerror=reject;img.src='./'+file;})));
-      await document.fonts.ready;if(!cancelled)setReady(true);
-    }).catch(()=>{if(!cancelled)setLoadingError(true);});return()=>{cancelled=true;};
+    const node=stage.current;if(!node)return;
+    // Only the artwork currently shown is required. Hidden wardrobe variants
+    // load when selected; they must not exhaust mobile memory or block startup.
+    const files=Array.from(node.querySelectorAll('img')).map(img=>img.src);
+    node.querySelectorAll<HTMLElement>('[style]').forEach(element=>{
+      const mask=element.style.maskImage||element.style.webkitMaskImage;
+      for(const match of mask.matchAll(/url\(["']?([^"')]+)["']?\)/g))files.push(new URL(match[1],document.baseURI).href);
+    });
+    void waitForArtwork(files,{onProgress:(value:number)=>{if(!cancelled)setProgress(value);}}).then(failed=>{
+      if(cancelled)return;
+      if(failed.length)setLoadingError(true);else setReady(true);
+    });
+    return()=>{cancelled=true;};
   },[]);
   const toggleSound=async()=>{
     const audio=music.current;if(!audio)return;
@@ -119,7 +138,7 @@ function App(){
     </button>;
   };
   return <>
-    <main className={'viewport '+(ready?'is-ready':'')} aria-label="Felix character studio">
+    <main ref={viewport} className={'viewport '+(ready?'is-ready':'')} aria-label="Felix character studio">
       <div className="stage-wrap" style={{width:2965*scale,height:1668*scale}}>
         <div ref={stage} className="stage" style={{transform:`scale(${scale})`}} inert={!ready}>
           <RawArt file="e759b.png" x={975} y={0} w={1572} h={1668}/>
@@ -129,10 +148,10 @@ function App(){
             <MaskGroup x={318} y={228} w={1281} h={1440} mask="04949.png" layers={[
               ['a1313.png',0,0,1281,1440],['94130.png',262,571,78,102],['ad026.png',0,671,1319,769],['1dc57.png',63,-185,886,1285]
             ]}/>
-            {(['red','black'] as const).map(color=><div key={color} className="portrait-eyes crossfade" style={{...rect(644,601,226,83),opacity:state.eyeColor===color?1:0}}><PortraitEyes property1={color==='red'?'Красные':'Черные'}/></div>)}
+            {state.eyeColor!=='blue'&&<div className="portrait-eyes crossfade" style={rect(644,601,226,83)}><PortraitEyes property1={state.eyeColor==='red'?'Красные':'Черные'}/></div>}
             <RawArt file="596cc.png" x={132} y={458} w={1461} h={1210}/>
             <RawArt file="4c94c.png" x={959} y={1062} w={145} h={132}/>
-            {[1,2].flatMap(h=>['w','p','b'].map(color=><div key={color+h} className="portrait-hair crossfade" data-color={color} data-hairstyle={h} style={{...rect(424,h===1?183:126,h===1?738:805,h===1?1034:1250),opacity:state.hairstyle===h&&state.hairColor===color?1:0}}><PortraitHair property1={`Hair ${color}${h}` as any}/></div>))}
+            <div className="portrait-hair crossfade" data-color={state.hairColor} data-hairstyle={state.hairstyle} style={rect(424,state.hairstyle===1?183:126,state.hairstyle===1?738:805,state.hairstyle===1?1034:1250)}><PortraitHair property1={`Hair ${state.hairColor}${state.hairstyle}` as any}/></div>
             <RawArt file="3bf7f.png" x={530} y={529} w={494} h={276}/>
             <RawArt file="08706.png" x={129} y={791} w={2066} h={877}/>
           </div>
@@ -142,12 +161,11 @@ function App(){
               ['85ce5.png',0,0,516,1427],['1afc7.png',-631,-241,1719,1668]
             ]}/>
             <div className="figure-body-detail" style={rect(1594,252,417,792)}><RawArt file="5668e.png" x={0} y={0} w={538} h={1114}/></div>
-            {['pants-dark','pants-light'].map(p=><div key={p} className="figure-clothing garment crossfade" style={{...rect(1533,736,506,884),opacity:state.pants===p?1:0}}><Clothing property1={p==='pants-dark'?'Штаны Хаки':'Джинсы'}/></div>)}
-            <div className="figure-clothing crossfade" style={{...rect(1500,266,609,609),opacity:state.swords?1:0}}><Clothing property1="Катаны"/></div>
-            <div className="figure-clothing garment crossfade" style={{...rect(1602,431,423,490),opacity:state.top==='shirt'?1:0}}><Clothing property1="Кофта"/></div>
-            <div className="figure-clothing garment crossfade" style={{...rect(1602,431,423,494),opacity:state.top==='vest'?1:0}}><Clothing property1="Жилет"/></div>
-            {[1,2].map(h=><div key={h} className={'figure-hair crossfade '+(state.hairColor==='b'?'hair-original':'hair-'+state.hairColor)} data-color={state.hairColor} data-hairstyle={h} style={{...rect(1678,220,185,320),opacity:state.hairstyle===h?1:0}}>{state.hairColor==='b'?<img className="original-hair" src={h===1?'./assets/figure-hair-black-loose.png':'./assets/figure-hair-black-tied.png'} alt="" draggable="false"/>:<FigureHair property1={h===1?'Hair w1':'Hair w2'}/>}</div>)}
-            <div className="figure-clothing figure-gloves crossfade" style={{...rect(1590,846,412,174),opacity:state.gloves?1:0}}><Clothing property1="Перчатки"/></div>
+            <div className="figure-clothing garment crossfade" style={rect(1533,736,506,884)}><Clothing property1={state.pants==='pants-dark'?'Штаны Хаки':'Джинсы'}/></div>
+            {state.swords&&<div className="figure-clothing crossfade" style={rect(1500,266,609,609)}><Clothing property1="Катаны"/></div>}
+            {state.top&&<div className="figure-clothing garment crossfade" style={rect(1602,431,423,state.top==='shirt'?490:494)}><Clothing property1={state.top==='shirt'?'Кофта':'Жилет'}/></div>}
+            <div className={'figure-hair crossfade '+(state.hairColor==='b'?'hair-original':'hair-'+state.hairColor)} data-color={state.hairColor} data-hairstyle={state.hairstyle} style={rect(1678,220,185,320)}>{state.hairColor==='b'?<img className="original-hair" src={assetPathPrefix+(state.hairstyle===1?'/figure-hair-black-loose.png':'/figure-hair-black-tied.png')} alt="" draggable="false"/>:<FigureHair property1={state.hairstyle===1?'Hair w1':'Hair w2'}/>}</div>
+            {state.gloves&&<div className="figure-clothing figure-gloves crossfade" style={rect(1590,846,412,174)}><Clothing property1="Перчатки"/></div>}
           </div>
 
           <header>
@@ -193,7 +211,7 @@ function App(){
             const e=equipment[key];return item(key,false,...backpackItemRect(e.cell[0],e.cell[1]));
           })}</div>
 
-          <button className="mascot-target" style={rect(173,965,355,375)} aria-label="Say hello to Bokkari" onMouseEnter={()=>setMascotActive(true)} onMouseLeave={()=>setMascotActive(false)} onFocus={()=>setMascotActive(true)} onBlur={()=>setMascotActive(false)} onClick={()=>{void playSound('click');setMascotActive(v=>!v);}}><img className={'mascot-art '+(mascotActive?'wave':'')} src="./assets/bokkari.png" alt="" draggable="false"/></button>
+          <button className="mascot-target" style={rect(173,965,355,375)} aria-label="Say hello to Bokkari" onMouseEnter={()=>setMascotActive(true)} onMouseLeave={()=>setMascotActive(false)} onFocus={()=>setMascotActive(true)} onBlur={()=>setMascotActive(false)} onClick={()=>{void playSound('click');setMascotActive(v=>!v);}}><img className={'mascot-art '+(mascotActive?'wave':'')} src={assetPathPrefix+'/bokkari.png'} alt="" draggable="false"/></button>
           <button className={'sound-button '+(sound?'on':'')} style={rect(230,1342,242,86)} aria-label={soundStarting?'Cancel music playback':sound?'Mute music':'Enable music'} aria-pressed={sound} disabled={!ready} onClick={toggleSound} title="Background music only; clicks and hovers stay on">
             <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 12h6l7-6v20l-7-6H5z"/>{sound?<><path d="M22 11c3 3 3 7 0 10"/><path d="M26 7c5 5 5 13 0 18"/></>:<path d="m23 12 7 8m0-8-7 8"/>}</svg>
             <span>{soundStarting?'Starting…':sound?'Music on':'Music off'}</span>
@@ -202,11 +220,9 @@ function App(){
       </div>
       <audio ref={music} src="./assets/domino-instrumental.mp3" loop preload="none" aria-hidden="true"/>
     </main>
-    {!ready&&<div className="loading" role="status"><span className="loading-name">Felix</span><p>{loadingError?'Some artwork could not load. Please retry.':'Preparing your character'}</p><div className="loading-track"><i style={{width:progress+'%'}}/></div>{loadingError&&<button onClick={()=>location.reload()}>Retry</button>}</div>}
+    {!ready&&<div className="loading" role="status"><span className="loading-name">Felix</span><p>{loadingError?'Some artwork is taking too long to load.':'Preparing your character'}</p><div className="loading-track"><i style={{width:progress+'%'}}/></div>{loadingError&&<><button onClick={()=>location.reload()}>Retry</button><button onClick={()=>setReady(true)}>Continue anyway</button></>}</div>}
     {tooltip&&<div className="item-tooltip" style={{left:tooltip.x,top:tooltip.y}}>{tooltip.label}</div>}
     <span className="sr-only" aria-live="polite">{announcement}</span>
     <Cursor/>
   </>;
 }
-
-createRoot(document.getElementById('root')!).render(<App/>);

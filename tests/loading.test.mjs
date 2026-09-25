@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {waitForArtwork} from '../src/loading.mjs';
+
+// Image is a browser boundary: drive real success/error/no-response events.
+const createImage=()=>({set src(url){
+  if(url==='ok.png') queueMicrotask(()=>this.onload?.());
+  if(url==='missing.png') queueMicrotask(()=>this.onerror?.());
+}});
+
+test('startup reports missing artwork instead of rejecting the whole startup task',async()=>{
+  const progress=[];
+  const failed=await waitForArtwork(['ok.png','missing.png'],{createImage,onProgress:p=>progress.push(p)});
+  assert.deepEqual(failed,['missing.png']);
+  assert.equal(progress.at(-1),100);
+});
+test('an image that never responds cannot trap the user in an endless loading screen',async()=>{
+  const failed=await waitForArtwork(['ok.png','stalled.png'],{createImage,timeoutMs:15});
+  assert.deepEqual(failed,['stalled.png']);
+});

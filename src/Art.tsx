@@ -1,5 +1,5 @@
 import React from "react";
-const assetPathPrefix = "./assets";
+import {assetPathPrefix} from './assets.mjs';
 const img = `${assetPathPrefix}/3147f.png`;
 const img1 = `${assetPathPrefix}/b7efe.png`;
 const img88 = `${assetPathPrefix}/10147.png`;
@@ -130,23 +130,23 @@ export function Component14({ className, property1 = "Катаны" }: Component
       {is3 && (
         <>
           <div className="absolute contents inset-[2.77%_0.68%_3.56%_6.45%]" data-node-id="11:747" data-name="Слой 88 (Clip group)">
-            <div className="absolute inset-[2.77%_0.68%_3.56%_5.66%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[7px_0px] mask-size-[821px_474px]" data-node-id="11:749" style={{ maskImage: `url("${img88}")` }} data-name="Слой 88">
+            <div className="absolute inset-[2.77%_0.68%_3.56%_5.66%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[7px_0px] mask-size-[821px_474px]" data-node-id="11:749" style={{ WebkitMaskImage: `url("${img88}")`, maskImage: `url("${img88}")` }} data-name="Слой 88">
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <img alt="" className="absolute h-full left-[-7.25%] max-w-none top-0 w-[107.25%]" src={img89} />
               </div>
             </div>
-            <div className="absolute inset-[3.56%_2.38%_-3.36%_6.56%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1px_-4px] mask-size-[821px_474px]" data-node-id="11:750" style={{ maskImage: `url("${img88}")` }} data-name="Слой 90">
+            <div className="absolute inset-[3.56%_2.38%_-3.36%_6.56%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1px_-4px] mask-size-[821px_474px]" data-node-id="11:750" style={{ WebkitMaskImage: `url("${img88}")`, maskImage: `url("${img88}")` }} data-name="Слой 90">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img90} />
             </div>
-            <div className="absolute inset-[1.98%_0.68%_2.37%_3.62%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[25px_4px] mask-size-[821px_474px]" data-node-id="11:751" style={{ maskImage: `url("${img88}")` }} data-name="Слой 91">
+            <div className="absolute inset-[1.98%_0.68%_2.37%_3.62%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[25px_4px] mask-size-[821px_474px]" data-node-id="11:751" style={{ WebkitMaskImage: `url("${img88}")`, maskImage: `url("${img88}")` }} data-name="Слой 91">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img91} />
             </div>
           </div>
           <div className="absolute contents inset-[67.79%_43.33%_6.32%_10.41%]" data-node-id="11:752" data-name="Слой 92 (Clip group)">
-            <div className="absolute inset-[67.79%_43.33%_6.32%_10.41%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-size-[409px_131px]" data-node-id="11:754" style={{ maskImage: `url("${img92}")` }} data-name="Слой 92">
+            <div className="absolute inset-[67.79%_43.33%_6.32%_10.41%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-size-[409px_131px]" data-node-id="11:754" style={{ WebkitMaskImage: `url("${img92}")`, maskImage: `url("${img92}")` }} data-name="Слой 92">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img93} />
             </div>
-            <div className="absolute inset-[67.39%_42.53%_-15.02%_9.84%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[5px_2px] mask-size-[409px_131px]" data-node-id="11:755" style={{ maskImage: `url("${img92}")` }} data-name="Слой 101">
+            <div className="absolute inset-[67.39%_42.53%_-15.02%_9.84%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[5px_2px] mask-size-[409px_131px]" data-node-id="11:755" style={{ WebkitMaskImage: `url("${img92}")`, maskImage: `url("${img92}")` }} data-name="Слой 101">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img101} />
             </div>
           </div>
@@ -194,16 +194,16 @@ export function Component14({ className, property1 = "Катаны" }: Component
       {is2 && (
         <>
           <div className="absolute contents inset-[0.47%_0_0_0]" data-node-id="11:722" data-name="Слой 18 (Clip group)">
-            <div className="absolute inset-[0.47%_-13.88%_-34.52%_-8.98%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[44px_0px] mask-size-[490px_421px]" data-node-id="11:724" style={{ maskImage: `url("${img18}")` }} data-name="Слой 18">
+            <div className="absolute inset-[0.47%_-13.88%_-34.52%_-8.98%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[44px_0px] mask-size-[490px_421px]" data-node-id="11:724" style={{ WebkitMaskImage: `url("${img18}")`, maskImage: `url("${img18}")` }} data-name="Слой 18">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img19} />
             </div>
-            <div className="absolute inset-[-70.92%_-106.53%_-101.18%_-88.57%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[434px_302px] mask-size-[490px_421px]" data-node-id="11:725" style={{ maskImage: `url("${img18}")` }} data-name="Слой 19">
+            <div className="absolute inset-[-70.92%_-106.53%_-101.18%_-88.57%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[434px_302px] mask-size-[490px_421px]" data-node-id="11:725" style={{ WebkitMaskImage: `url("${img18}")`, maskImage: `url("${img18}")` }} data-name="Слой 19">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img20} />
             </div>
-            <div className="absolute inset-[-271.63%_-151.84%_-192.91%_-88.57%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[434px_1151px] mask-size-[490px_421px]" data-node-id="11:726" style={{ maskImage: `url("${img18}")` }} data-name="Слой 23">
+            <div className="absolute inset-[-271.63%_-151.84%_-192.91%_-88.57%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[434px_1151px] mask-size-[490px_421px]" data-node-id="11:726" style={{ WebkitMaskImage: `url("${img18}")`, maskImage: `url("${img18}")` }} data-name="Слой 23">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img23} />
             </div>
-            <div className="absolute inset-[-4.02%_-6.73%_-1.42%_0.2%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1px_19px] mask-size-[490px_421px]" data-node-id="11:727" style={{ maskImage: `url("${img18}")` }} data-name="Слой 45">
+            <div className="absolute inset-[-4.02%_-6.73%_-1.42%_0.2%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-1px_19px] mask-size-[490px_421px]" data-node-id="11:727" style={{ WebkitMaskImage: `url("${img18}")`, maskImage: `url("${img18}")` }} data-name="Слой 45">
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <img alt="" className="absolute h-full left-[-6.9%] max-w-none top-0 w-[106.9%]" src={img45} />
               </div>
@@ -218,10 +218,10 @@ export function Component14({ className, property1 = "Катаны" }: Component
             <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img48} />
           </div>
           <div className="absolute contents inset-[18.91%_30%_29.31%_3.27%]" data-node-id="11:731" data-name="Слой 46 (Clip group)">
-            <div className="absolute inset-[18.91%_30%_29.31%_3.27%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-size-[327px_219px]" data-node-id="11:733" style={{ maskImage: `url("${img46}")` }} data-name="Слой 46">
+            <div className="absolute inset-[18.91%_30%_29.31%_3.27%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-size-[327px_219px]" data-node-id="11:733" style={{ WebkitMaskImage: `url("${img46}")`, maskImage: `url("${img46}")` }} data-name="Слой 46">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img47} />
             </div>
-            <div className="absolute inset-[19.62%_32.04%_30.97%_5.1%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-9px_-3px] mask-size-[327px_219px]" data-node-id="11:734" style={{ maskImage: `url("${img46}")` }} data-name="Слой 47">
+            <div className="absolute inset-[19.62%_32.04%_30.97%_5.1%] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-9px_-3px] mask-size-[327px_219px]" data-node-id="11:734" style={{ WebkitMaskImage: `url("${img46}")`, maskImage: `url("${img46}")` }} data-name="Слой 47">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img50} />
             </div>
           </div>
@@ -742,21 +742,21 @@ export function Component2({ className, property1 = "Frame 2" }: Component2Props
         <div className="absolute contents h-[336px] left-[163px] top-[864px] w-[252px]" data-node-id="1:183" data-name="Слой 105 (Clip group)">
           <div className="absolute flex h-[336px] items-center justify-center left-[163px] top-[864px] w-[252px]" data-node-id="1:185">
             <div className="-scale-y-100 flex-none rotate-90">
-              <div className="h-[252px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-size-[252px_336px] relative w-[336px]" style={{ maskImage: `url("${img114}")` }} data-name="Слой 105">
+              <div className="h-[252px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-size-[252px_336px] relative w-[336px]" style={{ WebkitMaskImage: `url("${img114}")`, maskImage: `url("${img114}")` }} data-name="Слой 105">
                 <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img115} />
               </div>
             </div>
           </div>
           <div className="absolute flex h-[73px] items-center justify-center left-[193px] top-[1025px] w-[138px]" data-node-id="1:186">
             <div className="-scale-y-100 flex-none rotate-90">
-              <div className="h-[138px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-30px_-161px] mask-size-[252px_336px] relative w-[73px]" style={{ maskImage: `url("${img114}")` }} data-name="Слой 114">
+              <div className="h-[138px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[-30px_-161px] mask-size-[252px_336px] relative w-[73px]" style={{ WebkitMaskImage: `url("${img114}")`, maskImage: `url("${img114}")` }} data-name="Слой 114">
                 <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img116} />
               </div>
             </div>
           </div>
           <div className="absolute flex h-[470px] items-center justify-center left-[40px] top-[1021px] w-[616px]" data-node-id="1:187">
             <div className="-scale-y-100 flex-none rotate-90">
-              <div className="h-[616px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[123px_-157px] mask-size-[252px_336px] relative w-[470px]" style={{ maskImage: `url("${img114}")` }} data-name="Слой 106">
+              <div className="h-[616px] mask-alpha mask-intersect mask-no-clip mask-no-repeat mask-position-[123px_-157px] mask-size-[252px_336px] relative w-[470px]" style={{ WebkitMaskImage: `url("${img114}")`, maskImage: `url("${img114}")` }} data-name="Слой 106">
                 <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={img117} />
               </div>
             </div>
