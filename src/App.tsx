@@ -5,6 +5,7 @@ import {unlockSound,playSound,attachMusic,setMusicActive} from './sound.mjs';
 import {waitForArtwork} from './loading.mjs';
 import {assetPathPrefix} from './assets.mjs';
 import {createHairSelection} from './hair-loading.mjs';
+import musicLabels from './music-labels.json';
 
 const rect=(x:number,y:number,w:number,h:number)=>({left:x,top:y,width:w,height:h});
 // Grid lines and item targets share one geometry, including the panel border/header.
@@ -234,8 +235,8 @@ export function App(){
 
           <button className="mascot-target" style={rect(173,965,355,375)} aria-label="Say hello to Bokkari" onMouseEnter={()=>setMascotActive(true)} onMouseLeave={()=>setMascotActive(false)} onFocus={()=>setMascotActive(true)} onBlur={()=>setMascotActive(false)} onClick={()=>{void playSound('click');setMascotActive(v=>!v);}}><img className={'mascot-art '+(mascotActive?'wave':'')} src={assetPathPrefix+'/bokkari.png'} alt="" draggable="false"/></button>
           <button className={'sound-button '+(sound?'on':'')} style={rect(230,1342,242,86)} aria-label={soundStarting?'Cancel music playback':sound?'Mute music':'Enable music'} aria-pressed={sound} disabled={!ready} onClick={toggleSound} title="Background music only; clicks and hovers stay on">
-            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 12h6l7-6v20l-7-6H5z"/>{sound?<><path d="M22 11c3 3 3 7 0 10"/><path d="M26 7c5 5 5 13 0 18"/></>:<path d="m23 12 7 8m0-8-7 8"/>}</svg>
-            <span>{soundStarting?'Starting…':sound?'Music on':'Music off'}</span>
+            <svg className="sound-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 12h6l7-6v20l-7-6H5z"/>{sound?<><path d="M22 11c3 3 3 7 0 10"/><path d="M26 7c5 5 5 13 0 18"/></>:<path d="m23 12 7 8m0-8-7 8"/>}</svg>
+            <svg className="sound-label" viewBox="0 0 154 50" aria-hidden="true"><path d={musicLabels[soundStarting?'starting':sound?'on':'off']}/></svg>
           </button>
         </div>
       </div>

@@ -541,7 +541,7 @@
 .particles{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:screen;opacity:.22;z-index:1;pointer-events:none}
 
 .sound-button{position:absolute;z-index:6;display:flex;align-items:center;justify-content:center;gap:14px;border:2px solid #53839299;border-radius:42% 48% 43% 47% / 17% 22% 19% 24%;background:#17212ce8;color:#b8dce7;font:38px Caveat,cursive;transform:rotate(-3deg);box-shadow:0 0 20px #32c3e012,inset 0 0 18px #4ec8e00a;transition:color .2s,border-color .2s,box-shadow .2s,transform .2s}
-.sound-button svg{width:40px;height:40px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
-/* Keep the label on one line inside the fixed scene, including narrow iOS views. */
-.sound-button span{flex:0 0 154px;width:154px;white-space:nowrap;line-height:1}
+.sound-button .sound-icon{width:40px;height:40px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+/* Font outlines scale with the button, independent of iOS text autosizing. */
+.sound-button .sound-label{width:154px;height:50px;flex:none;fill:currentColor;stroke:none;overflow:hidden}
 .sound-button:hover,.sound-button.on{color:#c5f8ff;border-color:#71d5e7;box-shadow:0 0 25px #40d8f02c,inset 0 0 22px #4ec8e015}.sound-button:hover{transform:rotate(-1deg) translateY(-2px)}.sound-button:active{transform:rotate(-1deg) scale(.97)}
