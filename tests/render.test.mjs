@@ -23,3 +23,9 @@ test('initial scene does not mount unequipped full-size clothing or alternate ey
   assert.equal((html.match(/class="figure-clothing /g)||[]).length,3);
   assert.equal((html.match(/class="portrait-eyes /g)||[]).length,0);
 });
+
+test('phone scene uses layout zoom instead of a giant transformed backing layer',()=>{
+  const style=html.match(/class="stage" style="([^"]+)"/)[1];
+  assert.ok(!style.includes('transform:'), 'outer scale promotes the full 2965px painting to a compositing surface');
+  assert.ok(style.includes('zoom:'));
+});

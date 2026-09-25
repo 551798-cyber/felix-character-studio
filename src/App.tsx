@@ -140,7 +140,9 @@ export function App(){
   return <>
     <main ref={viewport} className={'viewport '+(ready?'is-ready':'')} aria-label="Felix character studio">
       <div className="stage-wrap" style={{width:2965*scale,height:1668*scale}}>
-        <div ref={stage} className="stage" style={{transform:`scale(${scale})`}} inert={!ready}>
+        {/* Layout zoom is intentional. An outer transform makes WebKit retain
+            full 2965×1668 backing surfaces (over 1 GB at phone DPR 3). */}
+        <div ref={stage} className="stage" style={{zoom:scale}} inert={!ready}>
           <RawArt file="e759b.png" x={975} y={0} w={1572} h={1668}/>
           <RawArt file="1b969.png" x={1349} y={1561} w={950} h={107}/>
           {ready&&<Particles/>}
